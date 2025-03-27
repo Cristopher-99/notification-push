@@ -1,0 +1,137 @@
+/* Variables de colores */
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #3b82f6;
+  --background-color: #f3f4f6;
+  --text-color: #1f2937;
+  --white: #ffffff;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Header */
+.header {
+  background-color: var(--white);
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-list a:hover {
+  color: var(--secondary-color);
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.hero h1 {
+  font-size: 2rem;
+}
+
+.hero p {
+  margin: 1rem 0;
+  font-size: 1.2rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Notifications */
+.notifications {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.notification-list {
+  list-style: none;
+  padding: 0;
+}
+
+.notification-item {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item span {
+  display: block;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  background: var(--white);
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+}

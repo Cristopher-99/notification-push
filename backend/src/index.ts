@@ -17,3 +17,7 @@ app.use("/api", notificationRoutes);
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
+// - SCRAPPING
+// - TESTING
+// - CLUSTER

@@ -1,29 +1,58 @@
-# Real-Time Notifications System
+# Sistema de Notificaciones Push
 
 ## Description
 
-A system that sends real-time notifications to users about specific events.
+Sistema de notificaciones push, dividido en tres partes principales:
+
+### 1. **Backend**
+
+- Construido con Node.js y Express.
+- Maneja la lógica de envío de notificaciones a través de Firebase Admin.
+- Expone endpoints para ser consumidos por el frontend cuando se crea un nuevo contenido.
+
+### 2. **Frontend (Electron App)**
+
+- Aplicación de escritorio desarrollada en Electron.
+- Dispara los endpoints del backend al crear nuevo contenido en la plataforma.
+
+### 3. **Mobile App (React Native)**
+
+- Desarrollada en React Native.
+- Utiliza `react-native-firebase/messaging` para recibir notificaciones push.
+- Muestra las notificaciones en la UI de la aplicación móvil.
+
+### 4. **Mejoras Pendientes**
+
+- Implementación de Puppeteer y scraping para futuras mejoras.
+- Pruebas unitarias con Jest en todos los componentes.
+- Uso de clustering para mejorar la escalabilidad del backend.
+
+![alt text](<Sistema de notificaciones.jpg>)
 
 ## Technologies
 
-- Node.js
-- TypeScript
-- Socket.io
-- Jest for testing
+### 1. Backend
 
-- Tecnologías:
+- [x] Node.js
+- [x] TypeScript
+- [x] Jest
+- [x] Express
+- [x] Firebase Admin
 
-  - Node.js para el backend.
-  - TypeScript para la lógica.
-  - Socket.io para las notificaciones en tiempo real.
-  - firebase-admin
-  - Jest para pruebas.
+### 2. Frontend - Electron
 
-  - Características:
-  - Permitir a los usuarios suscribirse a diferentes tipos de notificaciones.
-    Enviar notificaciones a través de WebSockets.
+- [x] Electron
+- [x] TypeScript
+- [x] Jest
 
-## How to Run
+### 3. App Mobile - Ya desarollada
 
-1. Install dependencies: `npm install`
-2. Start the server: `npm start`
+- [x] React Native
+- [x] react-native-firebase/messaging
+
+### PENDIENTES A APLICAR:
+
+- [ ] PUPPETER
+- [ ] SCRAPPING
+- [ ] TESTING con JEST
+- [ ] CLUSTER

@@ -1,0 +1,26 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "A system that sends real-time notifications to users about specific events.",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run build && electron .",
+    "build": "tsc && copy src\\index.html dist\\index.html && xcopy /E /I src\\styles.css dist\\styles.css",
+    "dev": "electronmon -r ts-node/register src/main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/electron": "^1.4.38",
+    "@types/node": "^22.13.13",
+    "electron": "^35.1.0",
+    "electronmon": "^2.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "firebase": "^11.5.0"
+  }
+}

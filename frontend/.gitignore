@@ -1,0 +1,5 @@
+node_modules/
+.env
+dist/
+*.log
+sindicato-del-seguro-de-la-ra-firebase-adminsdk-3kiws-775b09706a.json
