@@ -1,50 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notifications App</title>
+    <title>Gestor de Notificaciones</title>
     <link rel="stylesheet" href="./styles.css" />
+    <style>
+      /* Estilos para la navegación */
+      .nav {
+        background-color: #007bff;
+        padding: 0.5rem 1rem;
+      }
+      .nav-list {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-list li a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+      }
+      .nav-list li a:hover {
+        color: #ffd700;
+      }
+
+      /* Estilos generales */
+      .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
+      /* Centramos el botón de obtener noticias */
+      .center-btn {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+
+      /* Secciones */
+      .notification-form,
+      .notifications {
+        margin-bottom: 2rem;
+      }
+
+      /* Loader global (spinner simple) */
+      .loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        display: none; /* oculto por defecto */
+      }
+      .loader {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #007bff;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
   </head>
   <body>
+    <!-- Loader global -->
+    <div id="loaderOverlay" class="loader-overlay">
+      <div class="loader"></div>
+    </div>
+
     <header class="header">
       <nav class="nav">
         <ul class="nav-list">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Notifications</a></li>
-          <li><a href="#">Settings</a></li>
+          <li><a href="#createNotification">Crear Notificación</a></li>
+          <li><a href="#fetchNews">Obtener Noticias desde la Web</a></li>
+          <li><a href="#notifications">Notificaciones</a></li>
         </ul>
       </nav>
     </header>
 
     <main class="container">
-      <section class="hero">
-        <h1>Welcome to Notifications App</h1>
-        <p>Get notified about important events and updates</p>
-        <button class="btn-primary">Get Started</button>
+      <!-- Sección para obtener noticias -->
+      <section id="fetchNews">
+        <div class="center-btn">
+          <button id="scrapeNotifyBtn" class="btn-primary">
+            Obtener Noticias de la Web
+          </button>
+        </div>
       </section>
 
-      <section class="notifications">
-        <h2>Latest Notifications</h2>
+      <!-- Sección: Crear Notificación Manual -->
+      <section id="createNotification" class="notification-form">
+        <h2>Crear Notificación Manual</h2>
+        <form id="notificationForm" class="form-card">
+          <div class="form-group">
+            <label for="titleInput">Título:</label>
+            <input
+              type="text"
+              id="titleInput"
+              name="title"
+              placeholder="Ingresa el título"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="bodyInput">Mensaje:</label>
+            <textarea
+              id="bodyInput"
+              name="body"
+              placeholder="Ingresa el mensaje"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="screenInput">Pantalla (opcional):</label>
+            <input
+              type="text"
+              id="screenInput"
+              name="screen"
+              placeholder="Ej: Union"
+            />
+          </div>
+          <button type="submit" class="btn-primary">Enviar Notificación</button>
+        </form>
+      </section>
+
+      <!-- Sección: Últimas Notificaciones -->
+      <section id="notifications" class="notifications">
+        <h2>Últimas Notificaciones</h2>
         <ul class="notification-list">
-          <li class="notification-item">
-            <p>New update available</p>
-            <span>1 hour ago</span>
-          </li>
-          <li class="notification-item">
-            <p>New message from John Doe</p>
-            <span>2 hours ago</span>
-          </li>
-          <li class="notification-item">
-            <p>New event scheduled</p>
-            <span>3 hours ago</span>
-          </li>
+          <!-- Render dinámico -->
         </ul>
       </section>
     </main>
 
     <footer class="footer">
-      <p>&copy; 2025 Notifications App</p>
+      <p>&copy; 2025 Cristopher Lazo</p>
     </footer>
+
+    <script>
+      // Funciones para mostrar y ocultar el loader
+      const showLoader = () => {
+        document.getElementById("loaderOverlay").style.display = "flex";
+      };
+      const hideLoader = () => {
+        document.getElementById("loaderOverlay").style.display = "none";
+      };
+
+      const renderNotification = ({ title, body }) => {
+        const notificationList = document.querySelector(".notification-list");
+        const newNotification = document.createElement("li");
+        newNotification.className = "notification-item";
+        newNotification.innerHTML = `
+          <div class="notification-icon">🔔</div>
+          <div class="notification-content">
+            <p class="title">${title}</p>
+            <p class="body">${body}</p>
+            <span>${new Date().toLocaleTimeString()}</span>
+          </div>
+        `;
+        notificationList.insertBefore(
+          newNotification,
+          notificationList.firstChild
+        );
+      };
+
+      document
+        .getElementById("notificationForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const title = document.getElementById("titleInput").value.trim();
+          const body = document.getElementById("bodyInput").value.trim();
+          const screen =
+            document.getElementById("screenInput").value.trim() || "Union";
+
+          if (!title || !body) return alert("Completa todos los campos");
+
+          try {
+            showLoader();
+            const response = await fetch(
+              "http://localhost:3000/api/send-notification",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title, body, screen }),
+              }
+            );
+
+            const data = await response.json();
+            console.log("Notificación enviada:", data);
+            renderNotification({ title, body });
+            event.target.reset();
+          } catch (error) {
+            console.error("Error enviando notificación:", error);
+            alert("Error al enviar la notificación.");
+          } finally {
+            hideLoader();
+          }
+        });
+
+      document
+        .getElementById("scrapeNotifyBtn")
+        .addEventListener("click", async () => {
+          try {
+            showLoader();
+            const response = await fetch(
+              "http://localhost:3000/api/scrape-notify"
+            );
+            const data = await response.json();
+            console.log("Resultado scraping:", data);
+            renderNotification({ title: data.title, body: data.body });
+          } catch (error) {
+            console.error("Error en scraping:", error);
+          } finally {
+            hideLoader();
+          }
+        });
+    </script>
   </body>
 </html>

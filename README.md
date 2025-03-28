@@ -38,6 +38,9 @@ Sistema de notificaciones push, dividido en tres partes principales:
 - [x] Jest
 - [x] Express
 - [x] Firebase Admin
+- [x] PUPPETER - SCRAPPING
+- [x] TESTING con JEST
+- [x] CLUSTER
 
 ### 2. Frontend - Electron
 
@@ -51,8 +54,3 @@ Sistema de notificaciones push, dividido en tres partes principales:
 - [x] react-native-firebase/messaging
 
 ### PENDIENTES A APLICAR:
-
-- [ ] PUPPETER
-- [ ] SCRAPPING
-- [ ] TESTING con JEST
-- [ ] CLUSTER
